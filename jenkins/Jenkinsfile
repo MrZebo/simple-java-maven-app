@@ -1,13 +1,14 @@
 pipeline {
     agent {
         kubernetes {
-           containers:
-           - name: maven
-             image: maven:3.6.3-jdk-8
-             command:
-             - sleep
-             args:
-             - infinity
+ // Rather than inline YAML, in a multibranch Pipeline you could use: yamlFile 'jenkins-pod.yaml'
+            // Or, to avoid YAML:
+            // containerTemplate {
+                   name 'maven'
+                   image 'maven:3.6.3-jdk-8'
+                   command 'sleep'
+                   args 'infinity'
+            // }
         }
     }
     stages {
